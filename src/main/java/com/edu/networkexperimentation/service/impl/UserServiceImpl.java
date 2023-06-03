@@ -81,6 +81,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
 
         HttpSession session = request.getSession();
         session.setAttribute(UserConstant.USER_LOGIN_STATE, safetyUser);
+//        log.info("生成的登录用户: " + ((ResponseUser)session.getAttribute(UserConstant.USER_LOGIN_STATE)).getUsername());
 
         return safetyUser;
     }

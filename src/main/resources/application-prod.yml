@@ -2,11 +2,22 @@ spring:
   # DataSource Config
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: 'jdbc:mysql://sh-cynosdbmysql-grp-98pxrcoq.sql.tencentcdb.com:29164/user_center?useSSL=false'
-    username: self
-    password: liyupi66!
+    url: 'jdbc:mysql://sh-cynosdbmysql-grp-10l8syuq.sql.tencentcdb.com:28072/kyxl_prod?useSSL=false'
+    username: kyxl
+    password: 123456Abc
+    hikari:
+      max-lifetime: 120000
   # session 失效时间
   session:
     timeout: 86400
 server:
   address: 0.0.0.0
+  port: 7693
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: false
+  global-config:
+    db-config:
+      logic-delete-field: isDelete
+      logic-delete-value: 1 # 逻辑已删除值(默认为 1)
+      logic-not-delete-value: 0 # 逻辑未删除值(默认为 0)

@@ -23,6 +23,7 @@ import static com.edu.networkexperimentation.contant.UserConstant.USER_LOGIN_STA
  * @author yupi
  */
 @RestController
+@CrossOrigin
 @RequestMapping("/user")
 public class UserController {
 
@@ -52,12 +53,19 @@ public class UserController {
     @PostMapping("/login")
     public BaseResponse<ResponseUser> userLogin(@RequestBody RequestLoginUser loginUser, HttpServletRequest request) {
         if (loginUser == null) {
-            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+            throw new BusinessException(ErrorCode.NULL_ERROR);
         }
 
         Long id = loginUser.getId();
         String password = loginUser.getPassword();
         ResponseUser user = userService.userLogin(id, password, request);
+        return ResultUtils.success(user);
+    }
+
+    @PostMapping("/cookie/login")
+    public BaseResponse<ResponseUser> userCookieLogin(HttpServletRequest request) {
+        ResponseUser user = (ResponseUser) request.getSession().getAttribute(USER_LOGIN_STATE);
+//        if (user == null) throw new BusinessException(ErrorCode.NULL_ERROR, "cookie登陆失败");
         return ResultUtils.success(user);
     }
 
@@ -67,5 +75,7 @@ public class UserController {
         userService.userLogout(request);
         return null;
     }
+
+
 
 }

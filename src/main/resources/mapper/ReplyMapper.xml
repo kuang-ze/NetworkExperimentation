@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.edu.networkexperimentation.mapper.ReplyMapper">
+
+    <resultMap id="BaseResultMap" type="com.edu.networkexperimentation.model.domain.Reply">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="content" column="content" jdbcType="VARCHAR"/>
+            <result property="publisherID" column="publisherID" jdbcType="BIGINT"/>
+            <result property="belongReplyID" column="belongReplyID" jdbcType="BIGINT"/>
+            <result property="floor" column="floor" jdbcType="INTEGER"/>
+            <result property="isRoot" column="isRoot" jdbcType="TINYINT"/>
+            <result property="createTime" column="createTime" jdbcType="TIMESTAMP"/>
+            <result property="updateTime" column="updateTime" jdbcType="TIMESTAMP"/>
+            <result property="isDelete" column="isDelete" jdbcType="TINYINT"/>
+            <result property="belongDiscussionID" column="belongDiscussionID" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,content,publisherID,
+        belongReplyID,floor,isRoot,
+        createTime,updateTime,isDelete,
+        belongDiscussionID
+    </sql>
+</mapper>
