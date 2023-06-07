@@ -2,7 +2,7 @@ package com.edu.networkexperimentation.service;
 
 import com.edu.networkexperimentation.model.domain.User;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.edu.networkexperimentation.model.request.ResponseUser;
+import com.edu.networkexperimentation.model.response.ResponseUser;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
  * @author kfz
  */
 public interface UserService extends IService<User> {
+
     /**
      * 用户注册
      * @param username 用户姓名
@@ -31,5 +32,9 @@ public interface UserService extends IService<User> {
      */
     ResponseUser userLogin(long id, String password, HttpServletRequest request);
 
+    /**
+     * 用户退出登录
+     * @param request 用户退出登录的请求
+     */
     void userLogout(HttpServletRequest request);
 }

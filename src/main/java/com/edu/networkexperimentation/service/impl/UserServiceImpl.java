@@ -6,7 +6,7 @@ import com.edu.networkexperimentation.common.ErrorCode;
 import com.edu.networkexperimentation.contant.UserConstant;
 import com.edu.networkexperimentation.exception.BusinessException;
 import com.edu.networkexperimentation.model.domain.User;
-import com.edu.networkexperimentation.model.request.ResponseUser;
+import com.edu.networkexperimentation.model.response.ResponseUser;
 import com.edu.networkexperimentation.service.UserService;
 import com.edu.networkexperimentation.mapper.UserMapper;
 import lombok.extern.slf4j.Slf4j;

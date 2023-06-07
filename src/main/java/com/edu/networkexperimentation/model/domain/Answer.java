@@ -10,37 +10,41 @@ import lombok.Data;
 
 /**
  * 
- * @TableName user
+ * @TableName answer
  */
-@TableName(value ="user")
+@TableName(value ="answer")
 @Data
-public class User implements Serializable {
+public class Answer implements Serializable {
     /**
-     * 学生id
-
+     * 回答ID
      */
     @TableId(type = IdType.AUTO)
     private Long id;
 
     /**
-     * 学生姓名
+     * 回答类型
      */
-    private String username;
+    private String type;
 
     /**
-     * 密码
+     * 回答对应的题目
      */
-    private String userPassword;
+    private Long questionID;
 
     /**
-     * 邮箱
+     * 回答对应的试卷
      */
-    private String email;
+    private Long paperID;
 
     /**
-     * 用户所处的年级
+     * 回答内容
      */
-    private Long gradeID;
+    private String content;
+
+    /**
+     * 回答是否正确
+     */
+    private Integer isTrue;
 
     /**
      * 创建时间
@@ -51,11 +55,6 @@ public class User implements Serializable {
      * 更新时间
      */
     private Date updateTime;
-
-    /**
-     * 0表示学生，1表示教师，2表示管理员
-     */
-    private Integer userIdentity;
 
     /**
      * 逻辑删除

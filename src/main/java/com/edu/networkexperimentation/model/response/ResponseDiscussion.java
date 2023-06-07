@@ -1,4 +1,4 @@
-package com.edu.networkexperimentation.model.request;
+package com.edu.networkexperimentation.model.response;
 
 import com.edu.networkexperimentation.model.domain.Discussion;
 import com.edu.networkexperimentation.model.domain.Reply;

@@ -3,12 +3,11 @@ package com.edu.networkexperimentation.controller;
 import com.edu.networkexperimentation.common.BaseResponse;
 import com.edu.networkexperimentation.common.ErrorCode;
 import com.edu.networkexperimentation.common.ResultUtils;
-import com.edu.networkexperimentation.contant.FileConstant;
 import com.edu.networkexperimentation.contant.UserConstant;
 import com.edu.networkexperimentation.exception.BusinessException;
 import com.edu.networkexperimentation.model.domain.Material;
-import com.edu.networkexperimentation.model.request.ResponseFile;
-import com.edu.networkexperimentation.model.request.ResponseUser;
+import com.edu.networkexperimentation.model.response.ResponseFile;
+import com.edu.networkexperimentation.model.response.ResponseUser;
 import com.edu.networkexperimentation.service.MaterialService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
@@ -33,7 +32,7 @@ public class MaterialController {
     @Resource
     private MaterialService materialService;
 
-    @PutMapping("/upload")
+    @PostMapping("/upload")
     public BaseResponse<Long> materialFileUpload(@RequestParam("file") MultipartFile file,
                                                  @RequestParam("title") String title,
                                                  @RequestParam("section") Long sectionID,
@@ -47,6 +46,8 @@ public class MaterialController {
         if (user == null || user.getUserIdentity() != UserConstant.ADMIN_ROLE) {
             throw new BusinessException(ErrorCode.NO_AUTH);
         }
+//        log.info(file.getOriginalFilename());
+//        return ResultUtils.success(null);
 
         Long uploadResult = materialService.upload(file, title, user.getId(), sectionID);
 

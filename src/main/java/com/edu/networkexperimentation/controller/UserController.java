@@ -3,16 +3,22 @@ package com.edu.networkexperimentation.controller;
 import com.edu.networkexperimentation.common.BaseResponse;
 import com.edu.networkexperimentation.common.ErrorCode;
 import com.edu.networkexperimentation.common.ResultUtils;
-import com.edu.networkexperimentation.contant.UserConstant;
 import com.edu.networkexperimentation.exception.BusinessException;
+import com.edu.networkexperimentation.model.domain.Grade;
+import com.edu.networkexperimentation.model.domain.User;
 import com.edu.networkexperimentation.model.request.RequestLoginUser;
 import com.edu.networkexperimentation.model.request.RequestRegisterUser;
-import com.edu.networkexperimentation.model.request.ResponseUser;
+import com.edu.networkexperimentation.model.response.ResponseGrade;
+import com.edu.networkexperimentation.model.response.ResponseUser;
+import com.edu.networkexperimentation.service.GradeService;
 import com.edu.networkexperimentation.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.edu.networkexperimentation.contant.UserConstant.ADMIN_ROLE;
 import static com.edu.networkexperimentation.contant.UserConstant.USER_LOGIN_STATE;
@@ -29,6 +35,9 @@ public class UserController {
 
     @Resource
     private UserService userService;
+
+    @Resource
+    private GradeService gradeService;
 
     @PostMapping("/register")
     public BaseResponse<Long> userRegister(@RequestBody RequestRegisterUser user, HttpServletRequest request) {
@@ -76,6 +85,14 @@ public class UserController {
         return null;
     }
 
-
+    @GetMapping("/grade/all")
+    public BaseResponse<List<ResponseGrade>> getAllGrade() {
+        List<Grade> grades = gradeService.list(null);
+        List<ResponseGrade> responseGrades = new ArrayList<>();
+        grades.forEach(item -> {
+            responseGrades.add(new ResponseGrade(item));
+        });
+        return ResultUtils.success(responseGrades);
+    }
 
 }

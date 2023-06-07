@@ -2,23 +2,22 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.edu.networkexperimentation.mapper.UserMapper">
+<mapper namespace="com.edu.networkexperimentation.mapper.AssignmentMapper">
 
-    <resultMap id="BaseResultMap" type="com.edu.networkexperimentation.model.domain.User">
+    <resultMap id="BaseResultMap" type="com.edu.networkexperimentation.model.domain.Assignment">
             <id property="id" column="id" jdbcType="BIGINT"/>
-            <result property="username" column="username" jdbcType="VARCHAR"/>
-            <result property="userPassword" column="userPassword" jdbcType="VARCHAR"/>
-            <result property="email" column="email" jdbcType="VARCHAR"/>
+            <result property="title" column="title" jdbcType="VARCHAR"/>
+            <result property="content" column="content" jdbcType="VARCHAR"/>
             <result property="gradeID" column="gradeID" jdbcType="BIGINT"/>
+            <result property="deadline" column="deadline" jdbcType="TIMESTAMP"/>
             <result property="createTime" column="createTime" jdbcType="TIMESTAMP"/>
             <result property="updateTime" column="updateTime" jdbcType="TIMESTAMP"/>
-            <result property="userIdentity" column="userIdentity" jdbcType="TINYINT"/>
             <result property="isDelete" column="isDelete" jdbcType="TINYINT"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,username,userPassword,
-        email,gradeID,createTime,
-        updateTime,userIdentity,isDelete
+        id,title,content,
+        gradeID,deadline,createTime,
+        updateTime,isDelete
     </sql>
 </mapper>

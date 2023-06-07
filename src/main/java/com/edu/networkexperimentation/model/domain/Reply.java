@@ -36,10 +36,6 @@ public class Reply implements Serializable {
      */
     private Long belongReplyID;
 
-    /**
-     * 回复顺序
-     */
-    private Integer floor;
 
     /**
      * 是否是直接的回复

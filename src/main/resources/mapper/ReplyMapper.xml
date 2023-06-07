@@ -9,7 +9,6 @@
             <result property="content" column="content" jdbcType="VARCHAR"/>
             <result property="publisherID" column="publisherID" jdbcType="BIGINT"/>
             <result property="belongReplyID" column="belongReplyID" jdbcType="BIGINT"/>
-            <result property="floor" column="floor" jdbcType="INTEGER"/>
             <result property="isRoot" column="isRoot" jdbcType="TINYINT"/>
             <result property="createTime" column="createTime" jdbcType="TIMESTAMP"/>
             <result property="updateTime" column="updateTime" jdbcType="TIMESTAMP"/>
@@ -19,7 +18,7 @@
 
     <sql id="Base_Column_List">
         id,content,publisherID,
-        belongReplyID,floor,isRoot,
+        belongReplyID,isRoot,
         createTime,updateTime,isDelete,
         belongDiscussionID
     </sql>

@@ -2,10 +2,9 @@ package com.edu.networkexperimentation.controller;
 
 import com.edu.networkexperimentation.common.BaseResponse;
 import com.edu.networkexperimentation.common.ResultUtils;
-import com.edu.networkexperimentation.model.domain.Chapter;
 import com.edu.networkexperimentation.model.domain.Section;
-import com.edu.networkexperimentation.model.request.ResponseMaterial;
-import com.edu.networkexperimentation.model.request.ResponseVideo;
+import com.edu.networkexperimentation.model.response.ResponseMaterial;
+import com.edu.networkexperimentation.model.response.ResponseVideo;
 import com.edu.networkexperimentation.service.SectionService;
 import org.springframework.web.bind.annotation.*;
 

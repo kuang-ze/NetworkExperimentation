@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.edu.networkexperimentation.mapper.QuestionMapper">
+
+    <resultMap id="BaseResultMap" type="com.edu.networkexperimentation.model.domain.Question">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="title" column="title" jdbcType="VARCHAR"/>
+            <result property="type" column="type" jdbcType="CHAR"/>
+            <result property="choice1" column="choice1" jdbcType="VARCHAR"/>
+            <result property="choice2" column="choice2" jdbcType="VARCHAR"/>
+            <result property="choice3" column="choice3" jdbcType="VARCHAR"/>
+            <result property="choice4" column="choice4" jdbcType="VARCHAR"/>
+            <result property="isTrue" column="isTrue" jdbcType="TINYINT"/>
+            <result property="correctChoice" column="correctChoice" jdbcType="INTEGER"/>
+            <result property="correctContent" column="correctContent" jdbcType="VARCHAR"/>
+            <result property="createTime" column="createTime" jdbcType="TIMESTAMP"/>
+            <result property="updateTime" column="updateTime" jdbcType="TIMESTAMP"/>
+            <result property="isDelete" column="isDelete" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,title,type,
+        choice1,choice2,choice3,
+        choice4,isTrue,correctChoice,
+        correctContent,createTime,updateTime,
+        isDelete
+    </sql>
+</mapper>

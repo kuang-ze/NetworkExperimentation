@@ -72,7 +72,7 @@ public class MaterialServiceImpl extends ServiceImpl<MaterialMapper, Material>
         } catch (Exception e) {
             throw new BusinessException(ErrorCode.SYSTEM_ERROR, "删除文件失败");
         }
-        this.removeById(material);
+        this.removeById(material.getId());
         return true;
     }
 }

@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.edu.networkexperimentation.mapper.SectionMapper;
 import com.edu.networkexperimentation.model.domain.Chapter;
 import com.edu.networkexperimentation.model.domain.Section;
-import com.edu.networkexperimentation.model.request.ResponseChapter;
+import com.edu.networkexperimentation.model.response.ResponseChapter;
 import com.edu.networkexperimentation.service.ChapterService;
 import com.edu.networkexperimentation.mapper.ChapterMapper;
 import lombok.extern.slf4j.Slf4j;

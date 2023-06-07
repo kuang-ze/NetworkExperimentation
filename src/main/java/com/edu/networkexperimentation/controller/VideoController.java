@@ -3,26 +3,20 @@ package com.edu.networkexperimentation.controller;
 import com.edu.networkexperimentation.common.BaseResponse;
 import com.edu.networkexperimentation.common.ErrorCode;
 import com.edu.networkexperimentation.common.ResultUtils;
-import com.edu.networkexperimentation.contant.FileConstant;
 import com.edu.networkexperimentation.contant.UserConstant;
 import com.edu.networkexperimentation.exception.BusinessException;
-import com.edu.networkexperimentation.model.domain.Material;
 import com.edu.networkexperimentation.model.domain.Video;
-import com.edu.networkexperimentation.model.request.ResponseFile;
-import com.edu.networkexperimentation.model.request.ResponseUser;
-import com.edu.networkexperimentation.model.request.ResponseVideo;
+import com.edu.networkexperimentation.model.response.ResponseUser;
+import com.edu.networkexperimentation.model.response.ResponseVideo;
 import com.edu.networkexperimentation.service.VideoService;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
-import java.net.URLEncoder;
 
 @RestController
 @RequestMapping("video")
@@ -32,7 +26,7 @@ public class VideoController {
     @Resource
     private VideoService videoService;
 
-    @PutMapping("/upload")
+    @PostMapping("/upload")
     public BaseResponse<Long> materialFileUpload(@RequestParam("file") MultipartFile file,
                                                  @RequestParam("title") String title,
                                                  @RequestParam("section") Long sectionID,

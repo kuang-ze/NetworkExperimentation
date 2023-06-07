@@ -9,4 +9,6 @@ public interface FileConstant {
 
     String MATERIAL_UPLOAD = "material";
 
+    String ASSIGNMENT_UPLOAD = "assignment";
+
 }

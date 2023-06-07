@@ -2,10 +2,9 @@ package com.edu.networkexperimentation.service;
 
 import com.edu.networkexperimentation.model.domain.Chapter;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.edu.networkexperimentation.model.request.ResponseChapter;
+import com.edu.networkexperimentation.model.response.ResponseChapter;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
 * @author 29764

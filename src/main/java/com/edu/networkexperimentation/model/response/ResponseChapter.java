@@ -1,11 +1,10 @@
-package com.edu.networkexperimentation.model.request;
+package com.edu.networkexperimentation.model.response;
 
 import com.edu.networkexperimentation.model.domain.Chapter;
 import com.edu.networkexperimentation.model.domain.Section;
 import lombok.Data;
 
 import java.util.ArrayList;
-import java.util.List;
 
 @Data
 public class ResponseChapter {

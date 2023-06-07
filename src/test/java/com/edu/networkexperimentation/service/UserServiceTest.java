@@ -1,7 +1,6 @@
 package com.edu.networkexperimentation.service;
 
 import com.edu.networkexperimentation.model.domain.User;
-import com.edu.networkexperimentation.model.request.ResponseUser;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -2,7 +2,8 @@ package com.edu.networkexperimentation.service;
 
 import com.edu.networkexperimentation.model.domain.Discussion;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.edu.networkexperimentation.model.request.ResponseDiscussion;
+import com.edu.networkexperimentation.model.request.RequestDiscussion;
+import com.edu.networkexperimentation.model.response.ResponseDiscussion;
 
 import java.util.List;
 
@@ -13,4 +14,8 @@ import java.util.List;
 */
 public interface DiscussionService extends IService<Discussion> {
     List<ResponseDiscussion> getAllDiscussion();
+
+    ResponseDiscussion getDiscussionByID(Long id);
+
+    Long publishDiscussion(RequestDiscussion discussion);
 }

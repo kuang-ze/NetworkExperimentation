@@ -3,14 +3,13 @@ package com.edu.networkexperimentation.controller;
 import com.edu.networkexperimentation.common.BaseResponse;
 import com.edu.networkexperimentation.common.ResultUtils;
 import com.edu.networkexperimentation.model.domain.Chapter;
-import com.edu.networkexperimentation.model.request.ResponseChapter;
+import com.edu.networkexperimentation.model.response.ResponseChapter;
 import com.edu.networkexperimentation.service.ChapterService;
 import com.edu.networkexperimentation.service.SectionService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
-import java.util.List;
 
 @RestController
 @CrossOrigin

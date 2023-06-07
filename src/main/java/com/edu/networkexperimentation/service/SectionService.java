@@ -2,8 +2,8 @@ package com.edu.networkexperimentation.service;
 
 import com.edu.networkexperimentation.model.domain.Section;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.edu.networkexperimentation.model.request.ResponseMaterial;
-import com.edu.networkexperimentation.model.request.ResponseVideo;
+import com.edu.networkexperimentation.model.response.ResponseMaterial;
+import com.edu.networkexperimentation.model.response.ResponseVideo;
 
 import java.util.List;
 
