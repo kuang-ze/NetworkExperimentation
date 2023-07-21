@@ -17,4 +17,8 @@ public interface AssignmentService extends IService<Assignment> {
     List<ResponseAssignment> getAssignmentsByGradeID(Long id);
 
     Long addAssignment(MultipartFile file, String title, Date deadline, Long gradeID);
+
+    List<ResponseAssignment> getAllAssignment();
+
+    Boolean deleteAssignment(Long id);
 }

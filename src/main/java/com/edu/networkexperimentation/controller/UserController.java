@@ -74,7 +74,7 @@ public class UserController {
     @PostMapping("/cookie/login")
     public BaseResponse<ResponseUser> userCookieLogin(HttpServletRequest request) {
         ResponseUser user = (ResponseUser) request.getSession().getAttribute(USER_LOGIN_STATE);
-//        if (user == null) throw new BusinessException(ErrorCode.NULL_ERROR, "cookie登陆失败");
+        if (user == null) throw new BusinessException(ErrorCode.NULL_ERROR, "cookie登陆失败");
         return ResultUtils.success(user);
     }
 
@@ -94,5 +94,4 @@ public class UserController {
         });
         return ResultUtils.success(responseGrades);
     }
-
 }

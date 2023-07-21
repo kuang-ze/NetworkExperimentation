@@ -1,11 +1,13 @@
 package com.edu.networkexperimentation.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.edu.networkexperimentation.common.ErrorCode;
 import com.edu.networkexperimentation.contant.FileConstant;
 import com.edu.networkexperimentation.exception.BusinessException;
 import com.edu.networkexperimentation.model.domain.Material;
 import com.edu.networkexperimentation.model.domain.Video;
+import com.edu.networkexperimentation.model.response.ResponseVideo;
 import com.edu.networkexperimentation.service.VideoService;
 import com.edu.networkexperimentation.mapper.VideoMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +18,9 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -28,6 +32,17 @@ import java.util.UUID;
 @Slf4j
 public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video>
         implements VideoService {
+
+    @Override
+    public List<ResponseVideo> getAllVideo() {
+        QueryWrapper<Video> wrapper = new QueryWrapper<>();
+        List<Video> videos = this.list(wrapper.orderByDesc("updateTime"));
+        List<ResponseVideo> responseVideos = new ArrayList<>();
+        videos.forEach(item -> {
+            responseVideos.add(new ResponseVideo(item));
+        });
+        return responseVideos;
+    }
 
     @Override
     public Long upload(MultipartFile file, String title, Long userID, Long sectionID) {
@@ -76,6 +91,13 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video>
         }
         this.removeById(video.getId());
         return true;
+    }
+
+    @Override
+    public ResponseVideo getLatestVideo() {
+        QueryWrapper<Video> wrapper = new QueryWrapper<>();
+        Video video = this.getOne(wrapper.orderByDesc("updateTime").last("limit 1"));
+        return new ResponseVideo(video);
     }
 }
 

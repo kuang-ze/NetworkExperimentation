@@ -34,12 +34,22 @@ public class AssignmentController {
         return ResultUtils.success(assignmentService.getAssignmentsByGradeID(id));
     }
 
+    @GetMapping("/all")
+    public BaseResponse<List<ResponseAssignment>> getAllAssignment() {
+        return ResultUtils.success(assignmentService.getAllAssignment());
+    }
+
     @PostMapping("/add")
     public BaseResponse<Long> addAssignment(@RequestParam("content") MultipartFile file,
                                             @RequestParam("title") String title,
                                             @RequestParam("date")Date deadline,
                                             @RequestParam("grade") Long gradeID) {
         return ResultUtils.success(assignmentService.addAssignment(file, title, deadline, gradeID));
+    }
+
+    @PostMapping("/delete/{id}")
+    public BaseResponse<Boolean> deleteAssignmentByID(@PathVariable Long id, HttpServletResponse response) {
+        return ResultUtils.success(assignmentService.deleteAssignment(id));
     }
 
     @GetMapping("/download/{id}")

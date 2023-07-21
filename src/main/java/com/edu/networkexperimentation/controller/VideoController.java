@@ -17,6 +17,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.util.List;
 
 @RestController
 @RequestMapping("video")
@@ -25,6 +26,11 @@ import java.io.*;
 public class VideoController {
     @Resource
     private VideoService videoService;
+
+    @GetMapping("/all")
+    public BaseResponse<List<ResponseVideo>> getAllVideo() {
+        return ResultUtils.success(videoService.getAllVideo());
+    }
 
     @PostMapping("/upload")
     public BaseResponse<Long> materialFileUpload(@RequestParam("file") MultipartFile file,
@@ -48,6 +54,11 @@ public class VideoController {
         Long uploadResult = videoService.upload(file, title, user.getId(), sectionID);
         return ResultUtils.success(uploadResult);
 //        return ResultUtils.success(file.getContentType());
+    }
+
+    @GetMapping("/info/latest")
+    public BaseResponse<ResponseVideo> getLatestVideoInfo() {
+        return ResultUtils.success(videoService.getLatestVideo());
     }
 
     @GetMapping("/info/{id}")
@@ -167,5 +178,4 @@ public class VideoController {
         boolean flag = videoService.deleteVideo(id);
         return ResultUtils.success(flag);
     }
-
 }

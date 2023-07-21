@@ -7,6 +7,7 @@ import com.edu.networkexperimentation.contant.UserConstant;
 import com.edu.networkexperimentation.exception.BusinessException;
 import com.edu.networkexperimentation.model.domain.Material;
 import com.edu.networkexperimentation.model.response.ResponseFile;
+import com.edu.networkexperimentation.model.response.ResponseMaterial;
 import com.edu.networkexperimentation.model.response.ResponseUser;
 import com.edu.networkexperimentation.service.MaterialService;
 import lombok.extern.slf4j.Slf4j;
@@ -22,15 +23,20 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.util.List;
 
 @RestController
 @CrossOrigin
 @RequestMapping("material")
 @Slf4j
 public class MaterialController {
-
     @Resource
     private MaterialService materialService;
+
+    @GetMapping("/all")
+    public BaseResponse<List<ResponseMaterial>> getAllMaterial(){
+        return ResultUtils.success(materialService.getAllMaterial());
+    }
 
     @PostMapping("/upload")
     public BaseResponse<Long> materialFileUpload(@RequestParam("file") MultipartFile file,

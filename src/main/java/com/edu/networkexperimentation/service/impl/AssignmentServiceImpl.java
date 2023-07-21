@@ -10,6 +10,7 @@ import com.edu.networkexperimentation.model.response.ResponseAssignment;
 import com.edu.networkexperimentation.service.AssignmentService;
 import com.edu.networkexperimentation.mapper.AssignmentMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.util.FileSystemUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -74,6 +75,25 @@ public class AssignmentServiceImpl extends ServiceImpl<AssignmentMapper, Assignm
             return assignment.getId();
         }
         throw new BusinessException(ErrorCode.SYSTEM_ERROR, "文件上传失败");
+    }
+
+    @Override
+    public List<ResponseAssignment> getAllAssignment() {
+        List<Assignment> assignments = this.list(null);
+        List<ResponseAssignment> responseAssignments = new ArrayList<>();
+        assignments.forEach(item->responseAssignments.add(new ResponseAssignment(item)));
+        return responseAssignments;
+    }
+
+    @Override
+    public Boolean deleteAssignment(Long id) {
+        Assignment assignment = this.getById(id);
+        try {
+            FileSystemUtils.deleteRecursively(new File(assignment.getContent()));
+        } catch (Exception e) {
+            throw new BusinessException(ErrorCode.SYSTEM_ERROR, "文件删除失败");
+        }
+        return this.removeById(assignment);
     }
 }
 
