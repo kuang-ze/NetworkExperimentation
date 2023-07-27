@@ -11,12 +11,14 @@ import java.util.List;
 public class ResponseHistoryPaper {
     private Long id;
     private String title;
+    private int isAnswered;
     private List<ResponseHistoryAnswer> xzAnswers;
     private List<ResponseHistoryAnswer> pdAnswers;
     private List<ResponseHistoryAnswer> tkAnswers;
     public ResponseHistoryPaper(Paper paper) {
         id = paper.getId();
         title = paper.getTitle();
+        isAnswered = paper.getIsAnswered() == null ? 0 : paper.getIsAnswered();
     }
 
     public void addXzAnswer(ResponseHistoryAnswer answer) {

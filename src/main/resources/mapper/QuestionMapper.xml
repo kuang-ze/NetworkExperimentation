@@ -15,6 +15,10 @@
             <result property="isTrue" column="isTrue" jdbcType="TINYINT"/>
             <result property="correctChoice" column="correctChoice" jdbcType="INTEGER"/>
             <result property="correctContent" column="correctContent" jdbcType="VARCHAR"/>
+            <result property="chapter" column="chapter" jdbcType="OTHER"/>
+            <result property="inter" column="inter" jdbcType="INTEGER"/>
+            <result property="difficulty" column="difficulty" jdbcType="INTEGER"/>
+            <result property="distinguish" column="distinguish" jdbcType="INTEGER"/>
             <result property="createTime" column="createTime" jdbcType="TIMESTAMP"/>
             <result property="updateTime" column="updateTime" jdbcType="TIMESTAMP"/>
             <result property="isDelete" column="isDelete" jdbcType="TINYINT"/>
@@ -24,7 +28,8 @@
         id,title,type,
         choice1,choice2,choice3,
         choice4,isTrue,correctChoice,
-        correctContent,createTime,updateTime,
-        isDelete
+        correctContent,chapter,inter,
+        difficulty,distinguish,createTime,
+        updateTime,isDelete
     </sql>
 </mapper>

@@ -10,11 +10,14 @@ import com.edu.networkexperimentation.model.domain.Paper;
 import com.edu.networkexperimentation.model.domain.Question;
 import com.edu.networkexperimentation.model.request.RequestAnswer;
 import com.edu.networkexperimentation.model.request.RequestPaper;
+import com.edu.networkexperimentation.model.request.RequestPaperGenetic;
 import com.edu.networkexperimentation.model.response.ResponseHistoryAnswer;
 import com.edu.networkexperimentation.model.response.ResponseHistoryPaper;
 import com.edu.networkexperimentation.model.response.ResponsePaper;
+import com.edu.networkexperimentation.service.GeneticService;
 import com.edu.networkexperimentation.service.PaperService;
 import com.edu.networkexperimentation.mapper.PaperMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -27,6 +30,7 @@ import java.util.List;
  * @createDate 2023-06-05 20:47:20
  */
 @Service
+@Slf4j
 public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper>
         implements PaperService {
 
@@ -36,12 +40,17 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper>
     @Resource
     private QuestionMapper questionMapper;
 
+    @Resource
+    private GeneticService geneticService;
+
     @Override
     public ResponsePaper preparePaper(RequestPaper requestPaper) {
         Paper paper = new Paper();
         paper.setTitle(requestPaper.getTitle());
         paper.setUserID(requestPaper.getUserID());
         this.save(paper);
+//        paper = this.getById(paper);
+        log.info("paper:\t" + paper);
         ResponsePaper responsePaper = new ResponsePaper(paper);
 
         QueryWrapper<Question> wrapper = new QueryWrapper<>();
@@ -94,6 +103,42 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper>
     }
 
     @Override
+    public ResponsePaper preparePaperByGenetic(RequestPaperGenetic requestPaperGenetic) {
+        List<Question> questions = geneticService.get_Paper(
+                requestPaperGenetic.getStuid(), requestPaperGenetic.getDifficulty(),
+                requestPaperGenetic.getDistinguish()
+                , requestPaperGenetic.getProportion(), requestPaperGenetic.getNums());
+
+        Paper paper = new Paper();
+        paper.setTitle(requestPaperGenetic.getTitle());
+        paper.setUserID((long) requestPaperGenetic.getStuid());
+        this.save(paper);
+        ResponsePaper responsePaper = new ResponsePaper(paper);
+        questions.forEach(item -> {
+            Answer answer = new Answer();
+            answer.setContent("");
+            answer.setType(item.getType());
+            answer.setPaperID(paper.getId());
+            answer.setQuestionID(item.getId());
+            answer.setIsTrue(0);
+            answerMapper.insert(answer);
+            log.info("问题种类:\t" + item.getType() + "\t" + item.getType().equals("0"));
+            switch (item.getType()) {
+                case "0":
+                    responsePaper.addXzQuestion(item);
+                    break;
+                case "1":
+                    responsePaper.addPdQuestion(item);
+                    break;
+                case "2":
+                    responsePaper.addTkQuestion(item);
+                    break;
+            }
+        });
+        return responsePaper;
+    }
+
+    @Override
     public void submitPaper(List<RequestAnswer> requestAnswers) {
         RequestAnswer t = requestAnswers.get(0);
         Paper paper = this.getById(t.getPaperID());
@@ -107,7 +152,8 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper>
             if (answer != null) {
                 answer.setContent(item.getContent());
                 Question question = questionMapper.selectById(item.getQuestionID());
-                switch (question.getType()) {
+                int type = Integer.parseInt(question.getType());
+                switch (type) {
                     case PaperConstant.XZ_TYPE:
                         answer.setIsTrue(isTrue(answer.getContent(), question.getCorrectChoice().toString()));
                         break;
@@ -126,13 +172,14 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper>
     @Override
     public ResponseHistoryPaper getPaperByID(Long id) {
         ResponseHistoryPaper paper = new ResponseHistoryPaper(this.getById(id));
+//        if (paper.getIsAnswered() == 0) return paper;
         QueryWrapper<Answer> wrapper = new QueryWrapper<>();
         wrapper.eq("paperID", paper.getId());
         List<Answer> answers = answerMapper.selectList(wrapper);
-
         answers.forEach(item -> {
             Question question = questionMapper.selectById(item.getQuestionID());
-            switch (question.getType()) {
+            int type = Integer.parseInt(question.getType());
+            switch (type) {
                 case PaperConstant.XZ_TYPE:
                     paper.addXzAnswer(new ResponseHistoryAnswer(question, item));
                     break;
@@ -144,7 +191,6 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper>
                     break;
             }
         });
-
         return paper;
     }
 
@@ -155,7 +201,8 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper>
         List<Paper> papers = this.list(wrapper);
         List<ResponseHistoryPaper> historyPapers = new ArrayList<>();
         papers.forEach(item -> {
-            historyPapers.add(new ResponseHistoryPaper(item));
+            if (item.getIsAnswered() == 0) {
+            } else historyPapers.add(new ResponseHistoryPaper(item));
         });
         return historyPapers;
     }

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.edu.networkexperimentation.mapper.TimesMapper">
+
+    <resultMap id="BaseResultMap" type="com.edu.networkexperimentation.model.domain.Times">
+            <id property="stuid" column="stuid" jdbcType="INTEGER"/>
+            <id property="chapterid" column="chapterid" jdbcType="INTEGER"/>
+            <id property="interid" column="interid" jdbcType="INTEGER"/>
+            <result property="checkin" column="checkin" jdbcType="TIMESTAMP"/>
+            <result property="checkout" column="checkout" jdbcType="TIMESTAMP"/>
+            <result property="scan" column="scan" jdbcType="INTEGER"/>
+            <result property="time_length" column="time_length" jdbcType="DOUBLE"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        stuid,chapterid,interid,
+        checkin,checkout,scan,
+        time_length
+    </sql>
+</mapper>

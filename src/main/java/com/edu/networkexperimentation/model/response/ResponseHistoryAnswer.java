@@ -9,7 +9,7 @@ import lombok.Data;
 public class ResponseHistoryAnswer {
     private Long id;
     private String title;
-    private String type;
+    private int type;
     private String choice1;
     private String choice2;
     private String choice3;
@@ -21,8 +21,8 @@ public class ResponseHistoryAnswer {
     public ResponseHistoryAnswer(Question  question, Answer answer) {
         id = question.getId();
         title = question.getTitle();
-        type = question.getType();
-        switch (question.getType()) {
+        type = Integer.parseInt(question.getType());
+        switch (type) {
             case PaperConstant.XZ_TYPE:
                 choice1 = question.getChoice1();
                 choice2 = question.getChoice2();

@@ -1,7 +1,7 @@
 package com.edu.networkexperimentation.contant;
 
 public interface PaperConstant {
-    String XZ_TYPE = "选择";
-    String PD_TYPE = "判断";
-    String TK_TYPE = "填空";
+    int XZ_TYPE = 0;
+    int PD_TYPE = 1;
+    int TK_TYPE = 2;
 }

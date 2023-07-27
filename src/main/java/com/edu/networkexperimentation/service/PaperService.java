@@ -4,6 +4,7 @@ import com.edu.networkexperimentation.model.domain.Paper;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.edu.networkexperimentation.model.request.RequestAnswer;
 import com.edu.networkexperimentation.model.request.RequestPaper;
+import com.edu.networkexperimentation.model.request.RequestPaperGenetic;
 import com.edu.networkexperimentation.model.response.ResponseHistoryPaper;
 import com.edu.networkexperimentation.model.response.ResponsePaper;
 
@@ -22,6 +23,13 @@ public interface PaperService extends IService<Paper> {
      * @return 制作好的试卷
      */
     ResponsePaper preparePaper(RequestPaper requestPaper);
+
+    /**
+     * 通过遗传算法的方式组卷
+     * @param requestPaperGenetic 遗传算法所需参数
+     * @return 制作好的卷子
+     */
+    ResponsePaper preparePaperByGenetic(RequestPaperGenetic requestPaperGenetic);
 
     /**
      * 提交试卷

@@ -18,7 +18,7 @@ public class ResponseQuestion {
         id = question.getId();
         title = question.getTitle();
         type = question.getType();
-        if (question.getType().equals(PaperConstant.XZ_TYPE)) {
+        if (question.getType().equals(String.valueOf(PaperConstant.XZ_TYPE))) {
             choice1 = question.getChoice1();
             choice2 = question.getChoice2();
             choice3 = question.getChoice3();

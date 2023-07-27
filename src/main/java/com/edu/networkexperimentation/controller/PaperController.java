@@ -3,10 +3,14 @@ package com.edu.networkexperimentation.controller;
 
 import com.edu.networkexperimentation.common.BaseResponse;
 import com.edu.networkexperimentation.common.ResultUtils;
+import com.edu.networkexperimentation.mapper.TimesMapper;
+import com.edu.networkexperimentation.model.domain.Question;
 import com.edu.networkexperimentation.model.request.RequestAnswer;
 import com.edu.networkexperimentation.model.request.RequestPaper;
+import com.edu.networkexperimentation.model.request.RequestPaperGenetic;
 import com.edu.networkexperimentation.model.response.ResponseHistoryPaper;
 import com.edu.networkexperimentation.model.response.ResponsePaper;
+import com.edu.networkexperimentation.service.GeneticService;
 import com.edu.networkexperimentation.service.PaperService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +25,12 @@ public class PaperController {
 
     @Resource
     private PaperService paperService;
+
+    @Resource
+    private TimesMapper timesMapper;
+
+    @Resource
+    private GeneticService geneticService;
 
     @PostMapping("/prepare")
     public BaseResponse<ResponsePaper> preparePaper(@RequestBody RequestPaper paper) {
@@ -43,6 +53,13 @@ public class PaperController {
 
     @GetMapping("/info/{id}")
     public BaseResponse<ResponseHistoryPaper> getHistoryPaperByID(@PathVariable("id") Long id) {
+        log.info("此接口被访问:\t" + id);
         return ResultUtils.success(paperService.getPaperByID(id));
+    }
+
+    @GetMapping("/getPaper")
+    public BaseResponse<ResponsePaper> getAllPaper(@RequestBody RequestPaperGenetic requestPaperGenetic) {
+//        return ResultUtils.success(timesMapper.selectList(null));
+        return ResultUtils.success(paperService.preparePaperByGenetic(requestPaperGenetic));
     }
 }

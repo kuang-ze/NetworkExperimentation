@@ -67,6 +67,26 @@ public class Question implements Serializable {
     private String correctContent;
 
     /**
+     * 所属章节
+     */
+    private Integer chapter;
+
+    /**
+     * 所属小节
+     */
+    private Integer inter;
+
+    /**
+     * 难度指数
+     */
+    private Integer difficulty;
+
+    /**
+     * 区分度
+     */
+    private Integer distinguish;
+
+    /**
      * 创建时间
      */
     private Date createTime;
