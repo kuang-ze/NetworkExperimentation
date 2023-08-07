@@ -6,6 +6,7 @@ import com.edu.networkexperimentation.common.ErrorCode;
 import com.edu.networkexperimentation.exception.BusinessException;
 import com.edu.networkexperimentation.mapper.ReplyMapper;
 import com.edu.networkexperimentation.mapper.SectionMapper;
+import com.edu.networkexperimentation.model.domain.Answer;
 import com.edu.networkexperimentation.model.domain.Discussion;
 import com.edu.networkexperimentation.model.domain.Reply;
 import com.edu.networkexperimentation.model.domain.Section;
@@ -15,6 +16,7 @@ import com.edu.networkexperimentation.model.response.ResponseReply;
 import com.edu.networkexperimentation.service.DiscussionService;
 import com.edu.networkexperimentation.mapper.DiscussionMapper;
 import com.edu.networkexperimentation.service.ReplyService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -24,24 +26,36 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
-* @author 29764
-* @description 针对表【discussion】的数据库操作Service实现
-* @createDate 2023-05-29 21:00:59
-*/
+ * @author 29764
+ * @description 针对表【discussion】的数据库操作Service实现
+ * @createDate 2023-05-29 21:00:59
+ */
 @Service
+@Slf4j
 public class DiscussionServiceImpl extends ServiceImpl<DiscussionMapper, Discussion>
-    implements DiscussionService{
+        implements DiscussionService {
 
     @Resource
     private ReplyService replyService;
 
+    @Resource
+    private DiscussionMapper discussionMapper;
+
 
     @Override
     public List<ResponseDiscussion> getAllDiscussion() {
-        List<Discussion> discussions = this.list(null);
+        QueryWrapper<Discussion> discussionQueryWrapper = new QueryWrapper<>();
+        List<Discussion> discussions = discussionMapper.selectList(
+                discussionQueryWrapper.orderByDesc("updateTime").last("limit 30")
+        );
         List<ResponseDiscussion> responseDiscussions = new ArrayList<>();
-        discussions.forEach(item->{
+        QueryWrapper<Reply> wrapper = new QueryWrapper<>();
+        discussions.forEach(item -> {
+            wrapper.clear();
+            wrapper.orderByDesc("updateTime").last("limit 1");
+            List<Reply> replies = replyService.list(wrapper);
             ResponseDiscussion discussion = new ResponseDiscussion(item);
+            discussion.setLastReplyValue(replies.get(0));
             responseDiscussions.add(discussion);
         });
         return responseDiscussions;
@@ -55,7 +69,7 @@ public class DiscussionServiceImpl extends ServiceImpl<DiscussionMapper, Discuss
         wrapper.eq("isRoot", 1);
         List<Reply> items = replyService.list(wrapper);
         List<ResponseReply> replies = new ArrayList<>();
-        items.forEach(item ->{
+        items.forEach(item -> {
             ResponseReply reply = new ResponseReply(item);
             replyService.getReply(reply.getId()).forEach(reply::addReply);
             replies.add(reply);
@@ -70,6 +84,10 @@ public class DiscussionServiceImpl extends ServiceImpl<DiscussionMapper, Discuss
         item.setTitle(discussion.getTitle());
         item.setContent(discussion.getContent());
         item.setPublisherID(discussion.getPublishUserID());
+        item.setPublisherName(discussion.getPublishUserName());
+
+        log.info("pub:\t" + item.getPublisherName() + "\t" + discussion.getPublishUserName());
+
         try {
             this.save(item);
         } catch (Exception e) {

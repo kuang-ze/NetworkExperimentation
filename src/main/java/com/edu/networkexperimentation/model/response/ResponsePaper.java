@@ -5,12 +5,14 @@ import com.edu.networkexperimentation.model.domain.Paper;
 import com.edu.networkexperimentation.model.domain.Question;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
 @NoArgsConstructor
+@Slf4j
 public class ResponsePaper {
     private Long id;
     private String title;
@@ -28,6 +30,7 @@ public class ResponsePaper {
     public boolean addXzQuestion(Question question) {
         if (xzQuestions == null) xzQuestions = new ArrayList<>();
         if (question.getType().equals(String.valueOf(PaperConstant.XZ_TYPE))) {
+            log.info("生成选择题:\t" + question.getType());
             xzQuestions.add(new ResponseQuestion(question));
             return true;
         }
@@ -37,6 +40,7 @@ public class ResponsePaper {
     public boolean addPdQuestion(Question question) {
         if (pdQuestions == null) pdQuestions = new ArrayList<>();
         if (question.getType().equals(String.valueOf(PaperConstant.PD_TYPE))) {
+            log.info("生成判断题:\t" + question.getType());
             pdQuestions.add(new ResponseQuestion(question));
             return true;
         }
@@ -46,6 +50,7 @@ public class ResponsePaper {
     public boolean addTkQuestion(Question question) {
         if (tkQuestions == null) tkQuestions = new ArrayList<>();
         if (question.getType().equals(String.valueOf(PaperConstant.TK_TYPE))) {
+            log.info("生成填空题:\t" + question.getType());
             tkQuestions.add(new ResponseQuestion(question));
             return true;
         }

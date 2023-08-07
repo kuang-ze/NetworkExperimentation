@@ -9,6 +9,7 @@
             <result property="title" column="title" jdbcType="VARCHAR"/>
             <result property="content" column="content" jdbcType="VARCHAR"/>
             <result property="publisherID" column="publisherID" jdbcType="BIGINT"/>
+            <result property="publisherName" column="publisherName" jdbcType="VARCHAR"/>
             <result property="createTime" column="createTime" jdbcType="TIMESTAMP"/>
             <result property="updateTime" column="updateTime" jdbcType="TIMESTAMP"/>
             <result property="isDelete" column="isDelete" jdbcType="TINYINT"/>
@@ -16,7 +17,7 @@
 
     <sql id="Base_Column_List">
         id,title,content,
-        publisherID,createTime,updateTime,
-        isDelete
+        publisherID,publisherName,createTime,
+        updateTime,isDelete
     </sql>
 </mapper>

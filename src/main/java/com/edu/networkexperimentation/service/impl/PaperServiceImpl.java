@@ -22,6 +22,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -115,6 +116,7 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper>
         this.save(paper);
         ResponsePaper responsePaper = new ResponsePaper(paper);
         questions.forEach(item -> {
+            log.info("id:\t" + item.getId());
             Answer answer = new Answer();
             answer.setContent("");
             answer.setType(item.getType());
@@ -122,7 +124,7 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper>
             answer.setQuestionID(item.getId());
             answer.setIsTrue(0);
             answerMapper.insert(answer);
-            log.info("问题种类:\t" + item.getType() + "\t" + item.getType().equals("0"));
+//            log.info("问题种类:\t" + item.getType() + "\t" + item.getType().equals("0"));
             switch (item.getType()) {
                 case "0":
                     responsePaper.addXzQuestion(item);

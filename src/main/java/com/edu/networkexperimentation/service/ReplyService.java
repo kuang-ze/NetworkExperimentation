@@ -3,6 +3,7 @@ package com.edu.networkexperimentation.service;
 import com.edu.networkexperimentation.model.domain.Reply;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.edu.networkexperimentation.model.request.RequestReply;
+import com.edu.networkexperimentation.model.response.ResponseReply;
 
 import java.util.List;
 
@@ -16,4 +17,6 @@ public interface ReplyService extends IService<Reply> {
     Long addReply(RequestReply reply);
 
     List<Reply> getReply(Long id);
+
+    List<ResponseReply> getLatestReply();
 }

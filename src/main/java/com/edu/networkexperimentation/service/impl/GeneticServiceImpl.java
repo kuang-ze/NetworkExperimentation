@@ -29,7 +29,7 @@ public class GeneticServiceImpl extends MppServiceImpl<QuestionMapper, Question>
     private int papernums = 6;//种群大小，即随机选择几套题来构建初始种群进行迭代
 
     private int questionsnums = 10;
-    private HashMap<Integer, List<Question>> papers = new HashMap<Integer, List<Question>>();
+    private HashMap<Integer, List<Question>> papers = null;
 
     private double[] y = new double[papernums];
     private double[] difficulty = new double[papernums];
@@ -230,6 +230,7 @@ public class GeneticServiceImpl extends MppServiceImpl<QuestionMapper, Question>
 
     @Override
     public List<Question> get_Paper(int stuid, int difficulty, int distinguish, double[] proportion, int[] nums) {
+        papers = new HashMap<Integer, List<Question>>();
         //初始化用户
         this.stuid = stuid;
         //初始化种群
@@ -250,7 +251,7 @@ public class GeneticServiceImpl extends MppServiceImpl<QuestionMapper, Question>
             }
         }
 //        if (index != -1) {
-            return papers.get(index);
+        return papers.get(index);
 //        }
 //        throw new BusinessException(ErrorCode.NULL_ERROR, "生成试卷失败");
     }

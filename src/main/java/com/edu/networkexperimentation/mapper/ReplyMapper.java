@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 /**
 * @author 29764
 * @description 针对表【reply】的数据库操作Mapper
-* @createDate 2023-05-29 21:00:59
+* @createDate 2023-07-27 15:53:22
 * @Entity com.edu.networkexperimentation.model.domain.Reply
 */
 public interface ReplyMapper extends BaseMapper<Reply> {

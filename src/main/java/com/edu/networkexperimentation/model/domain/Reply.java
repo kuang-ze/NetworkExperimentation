@@ -32,10 +32,14 @@ public class Reply implements Serializable {
     private Long publisherID;
 
     /**
+     * 发表者名称
+     */
+    private String publisherName;
+
+    /**
      * 所属回复
      */
     private Long belongReplyID;
-
 
     /**
      * 是否是直接的回复

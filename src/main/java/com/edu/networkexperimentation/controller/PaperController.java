@@ -57,7 +57,7 @@ public class PaperController {
         return ResultUtils.success(paperService.getPaperByID(id));
     }
 
-    @GetMapping("/getPaper")
+    @PostMapping("/getPaper")
     public BaseResponse<ResponsePaper> getAllPaper(@RequestBody RequestPaperGenetic requestPaperGenetic) {
 //        return ResultUtils.success(timesMapper.selectList(null));
         return ResultUtils.success(paperService.preparePaperByGenetic(requestPaperGenetic));

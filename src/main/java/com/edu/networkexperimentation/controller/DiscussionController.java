@@ -26,18 +26,21 @@ public class DiscussionController {
     @GetMapping("/all")
     public BaseResponse<List<ResponseDiscussion>> getAllDiscussion(HttpServletRequest request) {
         return ResultUtils.success(discussionService.getAllDiscussion());
-    }@GetMapping("/{id}")
+    }
+
+    @GetMapping("/{id}")
     public BaseResponse<ResponseDiscussion> getDiscussionById(@PathVariable("id") Long id, HttpServletRequest request) {
         return ResultUtils.success(discussionService.getDiscussionByID(id));
     }
 
+
     @PostMapping("/publish")
     public BaseResponse<Long> publishDiscussion(@RequestBody RequestDiscussion discussion,
                                                 HttpServletRequest request) {
-        ResponseUser user = (ResponseUser) request.getSession().getAttribute(UserConstant.USER_LOGIN_STATE);
-        if (user == null) {
-            throw new BusinessException(ErrorCode.NO_AUTH, "未登录");
-        }
+//        ResponseUser user = (ResponseUser) request.getSession().getAttribute(UserConstant.USER_LOGIN_STATE);
+//        if (user == null) {
+//            throw new BusinessException(ErrorCode.NO_AUTH, "未登录");
+//        }
 
         Long result = discussionService.publishDiscussion(discussion);
 

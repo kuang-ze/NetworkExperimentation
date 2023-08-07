@@ -8,5 +8,6 @@ public class RequestReply {
     private Long publisherUserID;
     private Long belongDiscussionID;
     private Long belongReplyID;
+    private String publisherName;
     private int isRoot;
 }

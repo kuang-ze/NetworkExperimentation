@@ -37,6 +37,11 @@ public class Discussion implements Serializable {
     private Long publisherID;
 
     /**
+     * 发表者名称
+     */
+    private String publisherName;
+
+    /**
      * 创建时间
      */
     private Date createTime;

@@ -9,6 +9,7 @@ import com.edu.networkexperimentation.model.request.RequestReply;
 import com.edu.networkexperimentation.model.response.ResponseReply;
 import com.edu.networkexperimentation.service.ReplyService;
 import com.edu.networkexperimentation.mapper.ReplyMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ import java.util.List;
 * @createDate 2023-05-29 21:00:59
 */
 @Service
+@Slf4j
 public class ReplyServiceImpl extends ServiceImpl<ReplyMapper, Reply>
     implements ReplyService{
 
@@ -30,7 +32,10 @@ public class ReplyServiceImpl extends ServiceImpl<ReplyMapper, Reply>
         item.setBelongReplyID(reply.getBelongReplyID());
         item.setBelongDiscussionID(reply.getBelongDiscussionID());
         item.setPublisherID(reply.getPublisherUserID());
+        item.setPublisherName(reply.getPublisherName());
         item.setIsRoot(reply.getIsRoot());
+
+        log.info(item.getPublisherName());
 
         try {
             this.save(item);
@@ -47,6 +52,18 @@ public class ReplyServiceImpl extends ServiceImpl<ReplyMapper, Reply>
         wrapper.eq("belongReplyID", id);
         wrapper.eq("isRoot", 0);
         return this.list(wrapper);
+    }
+
+    @Override
+    public List<ResponseReply> getLatestReply() {
+        QueryWrapper<Reply> wrapper = new QueryWrapper<>();
+        wrapper.orderByDesc("updateTime").last("limit 10");
+        List<Reply> replies = this.list(wrapper);
+        List<ResponseReply> responseReplies = new ArrayList<>();
+        replies.forEach(item-> {
+            responseReplies.add(new ResponseReply(item));
+        });
+        return responseReplies;
     }
 }
 

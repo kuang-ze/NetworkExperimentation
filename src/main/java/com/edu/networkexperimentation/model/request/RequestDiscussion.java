@@ -7,4 +7,5 @@ public class RequestDiscussion {
     private String title;
     private String content;
     private Long publishUserID;
+    private String publishUserName;
 }
