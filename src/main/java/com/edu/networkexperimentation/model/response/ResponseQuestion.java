@@ -13,11 +13,13 @@ public class ResponseQuestion {
     private String choice2;
     private String choice3;
     private String choice4;
+    private double difficulty;
 
     public ResponseQuestion(Question question) {
         id = question.getId();
         title = question.getTitle();
         type = question.getType();
+        difficulty = question.getDifficulty();
         if (question.getType().equals(String.valueOf(PaperConstant.XZ_TYPE))) {
             choice1 = question.getChoice1();
             choice2 = question.getChoice2();

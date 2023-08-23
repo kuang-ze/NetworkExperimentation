@@ -2,7 +2,7 @@ spring:
   # DataSource Config
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: 'jdbc:mysql://sh-cynosdbmysql-grp-10l8syuq.sql.tencentcdb.com:28072/kyxl_prod?useSSL=false'
+    url: "jdbc:mysql://sh-cynosdbmysql-grp-10l8syuq.sql.tencentcdb.com:28072/kyxl_prod?useSSL=false"
     username: kyxl
     password: 123456Abc
     hikari:

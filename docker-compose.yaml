@@ -1,0 +1,26 @@
+version: "3.8"
+services:
+  edu-api:
+    container_name: NetworkExperimentation
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ".:/app"
+    depends_on:
+      - mysql-db
+    ports:
+      - "7693:7693"
+
+  mysql-db:
+    container_name: mysql_db_backend
+    image: "mysql:8.0.33"
+    ports:
+      - "33306:3306"
+    restart: always
+    environment:
+      MYSQL_DATABASE: kyxl
+      MYSQL_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: "root"
+    volumes:
+      - "./init.sql:/docker-entrypoint-initdb.d/init.sql"

@@ -51,7 +51,7 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper>
         paper.setUserID(requestPaper.getUserID());
         this.save(paper);
 //        paper = this.getById(paper);
-        log.info("paper:\t" + paper);
+        // log.info("paper:\t" + paper);
         ResponsePaper responsePaper = new ResponsePaper(paper);
 
         QueryWrapper<Question> wrapper = new QueryWrapper<>();
@@ -116,7 +116,7 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper>
         this.save(paper);
         ResponsePaper responsePaper = new ResponsePaper(paper);
         questions.forEach(item -> {
-            log.info("id:\t" + item.getId());
+            // log.info("id:\t" + item.getId());
             Answer answer = new Answer();
             answer.setContent("");
             answer.setType(item.getType());
